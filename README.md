@@ -16,10 +16,10 @@ require 'diff_colorize'
 
 result = DiffColorize.diff("abcde", "aBcDe")
 
-rsult.color_t1
+result.color_t1
 => "a\e[31mb\e[0mc\e[31md\e[0me"
 
-rsult.color_t2
+result.color_t2
 => "a\e[31mB\e[0mc\e[31mD\e[0me"
 
 ```
