@@ -23,8 +23,8 @@ describe DiffColorize do
       let(:t2) { "a" }
 
       it do
-        expect(subject.diff[:t1_diff]).to be_empty
-        expect(subject.diff[:t2_diff]).to be_empty
+        expect(subject.t1_diff).to be_empty
+        expect(subject.t2_diff).to be_empty
       end
     end
 
@@ -33,13 +33,28 @@ describe DiffColorize do
       let(:t2) { "aBcDe" }
 
       it do
-        expect(subject.diff[:t1_diff]).not_to be_empty
-        expect(subject.diff[:t2_diff]).not_to be_empty
+        expect(subject.t1_diff).not_to be_empty
+        expect(subject.t2_diff).not_to be_empty
       end
 
       it 'color' do
         expect(subject.color_t1).to eq("a\e[31mb\e[0mc\e[31md\e[0me")
-        expect(subject.color_t2).to eq("a\e[31mB\e[0mc\e[31mD\e[0me")
+        expect(subject.color_t2).to eq("a\e[32mB\e[0mc\e[32mD\e[0me")
+      end
+    end
+
+    context 'change color' do
+      let(:t1) { "abcde" }
+      let(:t2) { "aBcDe" }
+
+      before do
+        subject.color1 = "\e[33m"
+        subject.color2 = "\e[34m"
+      end
+
+      it 'color' do
+        expect(subject.color_t1).to eq("a\e[33mb\e[0mc\e[33md\e[0me")
+        expect(subject.color_t2).to eq("a\e[34mB\e[0mc\e[34mD\e[0me")
       end
     end
   end
