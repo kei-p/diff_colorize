@@ -30,6 +30,25 @@ module DiffColorize
       colorize_diff_text(t2, t2_diff)
     end
 
+    def superimpose
+      cursor = { t1: 0, t2: 0 }
+      diff.inject('') do |c_text, d|
+        case d.action
+        when '-'
+          s = t1[cursor[:t1]..d.position-1]
+          c_s = colorized_string(d)
+          cursor[:t1] += d.element.length
+        when '+'
+          s = t2[cursor[:t2]..d.position-1]
+          c_s = colorized_string(d)
+          cursor[:t2] += d.element.length
+        end
+        cursor[:t1] += s.length
+        cursor[:t2] += s.length
+        c_text << s + c_s
+      end
+    end
+
     private
 
     def color_by_diff(d)
