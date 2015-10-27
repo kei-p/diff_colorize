@@ -9,10 +9,6 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Keisuke Ishizawa"]
   spec.email         = ["k_ishizawa@sfidante.co.jp"]
 
-  if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com' to prevent pushes to rubygems.org, or delete to allow pushes to any server."
-  end
-
   spec.summary       = %q{Compare two text and decorate text differences.}
   spec.description   = %q{}
   spec.homepage      = "https://github.com/kei-p/diff_colorize"
