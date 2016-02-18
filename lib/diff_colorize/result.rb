@@ -32,7 +32,7 @@ module DiffColorize
 
     def superimpose
       cursor = { t1: 0, t2: 0 }
-      diff.inject('') do |c_text, d|
+      text = diff.inject('') do |c_text, d|
         case d.action
         when '-'
           s = t1[cursor[:t1]..d.position-1]
@@ -47,6 +47,7 @@ module DiffColorize
         cursor[:t2] += s.length
         c_text << s + c_s
       end
+      text << t1[cursor[:t1]..-1]
     end
 
     private

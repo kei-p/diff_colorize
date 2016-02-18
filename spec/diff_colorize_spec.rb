@@ -58,4 +58,15 @@ describe DiffColorize do
       end
     end
   end
+
+  describe '#superimpose' do
+    subject { DiffColorize.diff(t1, t2).superimpose }
+
+    let(:t1) { "AAAabcdeAAA" }
+    let(:t2) { "AAAaBcDeAAA" }
+
+    it do
+      expect(subject).to eq("AAAa\e[31mb\e[0m\e[32mB\e[0mc\e[31md\e[0m\e[32mD\e[0meAAA")
+    end
+  end
 end
